@@ -51,7 +51,22 @@ class Loader
         $this->ensureFileIsReadable();
 
         $filePath = $this->filePath;
-        $lines = $this->readLinesFromFile($filePath);
+
+        $file = file_get_contents($filepath);
+
+        $json = json_decode(json)
+
+    	$db = new PDO('mysql:host='.$json->db_host.';dbname='.$json->db_name.';charset='.$json->db_charset, 
+    		$json->db_username, 
+    		$json->db_password, 
+    		array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));)
+
+		$stmt = $db->prepare('select * from ? where prefix = ? limit 1');
+		$stmt = $db->execute(array($json->db_table));
+		$row = $stmt->fetch();
+		// use Laravel's error handle logic to catch PDOException
+
+        $lines = $row;
         foreach ($lines as $line) {
             if ($this->isComment($line)) {
                 continue;
